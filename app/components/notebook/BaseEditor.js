@@ -15,10 +15,10 @@ export default class BaseEditor extends React.Component {
     this.onChange = (editorState) => {
       this.setState({ editorState });
 
-      // Redux action
-      this.props.updateEditor({
-        content: convertToRaw(editorState.getCurrentContent())
-      });
+      // // Redux action
+      // this.props.updateEditor({
+      //   content: convertToRaw(editorState.getCurrentContent())
+      // });
     };
   }
 
@@ -29,7 +29,8 @@ export default class BaseEditor extends React.Component {
         <div className={styles.editor}>
           <Editor
             placeholder="Enter text..."
-            editorState={EditorState.acceptSelection(this.props.editorState, this.state.editorState.getSelection())}
+            editorState={this.state.editorState}
+            // editorState={EditorState.acceptSelection(this.props.editorState, this.state.editorState.getSelection())}
             onChange={this.onChange}
             spellCheck
           />
