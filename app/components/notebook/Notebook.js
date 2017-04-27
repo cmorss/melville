@@ -8,10 +8,10 @@ export default class Notebook extends Component {
 
   updateEditor(update) {
     this.props.updateNotebook({
-      notebook: this.props.notebook,
-      content:  update.content
+      notebookId: this.props.notebook.id,
+      content:    update.content
     });
-    this.props.incrementCounter({ notebook: this.props.notebook });
+    this.props.incrementCounter({ notebookId: this.props.notebook.id });
   }
 
   render() {

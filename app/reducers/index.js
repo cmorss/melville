@@ -1,11 +1,11 @@
 // @flow
 import { combineReducers } from 'redux';
 import { routerReducer as router } from 'react-router-redux';
-import notebook from './notebook';
+import notebooks from './notebooks';
 
 const rootReducer = combineReducers({
   router,
-  notebook
+  notebooks
 });
 
 export default rootReducer;
