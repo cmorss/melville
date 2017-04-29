@@ -26,7 +26,6 @@ export default class BaseEditor extends React.Component {
   };
 
   editorStateFromProps() {
-    console.log("editorStateFromProps", this.props)
     if (this.props.notebook.content)
       return EditorState.createWithContent(convertFromRaw(this.props.notebook.content));
     else

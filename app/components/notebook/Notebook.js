@@ -15,11 +15,12 @@ export default class Notebook extends Component {
   }
 
   render() {
-    console.log("notebook render")
+    let notebook = this.props.notebook;
+
     return (
       <div className={styles.container} data-tid="container">
-        <h2>Notebook #{this.props.notebook.counter}</h2>
-        <BaseEditor notebook={this.props.notebook} updateEditor={this.updateEditor.bind(this)} />
+        <h2>{notebook.title} #{notebook.counter}</h2>
+        <BaseEditor notebook={notebook} updateEditor={this.updateEditor.bind(this)} />
       </div>
     );
   }
