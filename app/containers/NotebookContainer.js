@@ -7,7 +7,8 @@ import * as NotebookActions from '../actions/notebooks';
 
 function mapStateToProps(state) {
   console.log("mapStateToProps", state);
-  const notebook = state.notebooks[1];
+  const notebook = state.notebooks["ID-1"];
+
   console.log("mapStateToProps, notebook: ", notebook);
   return { notebook: notebook };
 }
