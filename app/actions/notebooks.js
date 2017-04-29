@@ -7,10 +7,3 @@ export function updateNotebook({ notebookId, content }) {
     content
   };
 }
-
-export function incrementCounter({ notebookId }) {
-  return {
-    type: types.INCREMENT_COUNTER,
-    notebookId
-  };
-}

@@ -11,7 +11,6 @@ export default class Notebook extends Component {
       notebookId: this.props.notebook.id,
       content:    update.content
     });
-    this.props.incrementCounter({ notebookId: this.props.notebook.id });
   }
 
   render() {
@@ -19,7 +18,6 @@ export default class Notebook extends Component {
 
     return (
       <div className={styles.container} data-tid="container">
-        <h2>{notebook.title} #{notebook.counter}</h2>
         <BaseEditor notebook={notebook} updateEditor={this.updateEditor.bind(this)} />
       </div>
     );
@@ -28,6 +26,5 @@ export default class Notebook extends Component {
 
 Notebook.propTypes = {
   notebook: PropTypes.object.isRequired,
-  updateNotebook: PropTypes.func.isRequired,
-  incrementCounter: PropTypes.func.isRequired
+  updateNotebook: PropTypes.func.isRequired
 };

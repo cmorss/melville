@@ -6,7 +6,6 @@ const initialState = {
 };
 
 export default (state = initialState, action = {}) => {
-
   function cloneNotebook(state, action) {
     if (Util.isBlank(action.notebookId))
       throw "Expected action to have a notebookId";
@@ -18,20 +17,13 @@ export default (state = initialState, action = {}) => {
     return Object.assign({}, notebook);
   }
 
-  let notebook;
-
   switch (action.type) {
     case UPDATE_NOTEBOOK:
-      notebook = cloneNotebook(state, action);
+      let notebook = cloneNotebook(state, action);
 
       if (action.content) notebook.content = action.content;
       if (action.title) notebook.title = action.title;
 
-      return {...state, [action.notebookId]: notebook};
-
-    case INCREMENT_COUNTER:
-      notebook = cloneNotebook(state, action);
-      notebook.counter++;
       return {...state, [action.notebookId]: notebook};
 
     default:

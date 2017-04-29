@@ -34,7 +34,7 @@ export default class BaseEditor extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} data-tid="container">
         <LeftGutter />
         <div className={styles.editor}  onClick={this.focus}>
           <Editor
