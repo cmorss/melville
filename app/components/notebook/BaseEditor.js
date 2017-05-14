@@ -43,7 +43,7 @@ export default class BaseEditor extends React.Component {
             editorState={EditorState.acceptSelection(this.editorStateFromProps(), this.state.editorState.getSelection())}
             onChange={this.onChange}
             ref='editor'
-            spellCheck
+            spellCheck={true}
           />
         </div>
         <RightGutter />

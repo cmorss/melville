@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history';
 import { routerMiddleware, push } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
+import promiseMiddleware from 'redux-promise-middleware';
 
 const history = createBrowserHistory();
 
@@ -15,6 +16,7 @@ const configureStore = (initialState: ?counterStateType) => {
 
   // Thunk Middleware
   middleware.push(thunk);
+  middleware.push(promiseMiddleware());
 
   // Logging Middleware
   const logger = createLogger({
@@ -26,6 +28,7 @@ const configureStore = (initialState: ?counterStateType) => {
   // Router Middleware
   const router = routerMiddleware(hashHistory);
   middleware.push(router);
+  middleware.push();
 
   // Redux DevTools Configuration
   const actionCreators = {
@@ -40,8 +43,6 @@ const configureStore = (initialState: ?counterStateType) => {
       actionCreators,
     })
     : compose;
-  /* eslint-enable no-underscore-dangle */
-
   // Apply Middleware & Compose Enhancers
   enhancers.push(applyMiddleware(...middleware));
   const enhancer = composeEnhancers(...enhancers);

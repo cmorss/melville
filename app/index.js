@@ -4,8 +4,17 @@ import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
+import MenuBuilder from "./menu";
 
+const electron = require('electron');
+const remote = electron.remote;
+const { Menu } = remote;
+
+let appMenu = Menu.getApplicationMenu();
 const store = configureStore();
+const mainWindow = remote.getCurrentWindow();
+const menuBuilder = new MenuBuilder(mainWindow, appMenu, store);
+menuBuilder.buildMenu(Menu);
 
 render(
   <AppContainer>

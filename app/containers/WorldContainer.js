@@ -3,16 +3,17 @@ import React, { Component } from 'react';
 import World from '../components/World';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import * as WorldActions from '../actions/world';
 import * as NotebookActions from '../actions/notebooks';
 
 function mapStateToProps(state) {
-  console.log("WorldContainer#mapStateToProps: state = ",state);
   const notebook = state.notebooks[state.world.activeNotebookId];
-  return { activeNotebook: notebook };
+  return { activeNotebook: notebook, drawerOpen: state.world.drawerOpen };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators(NotebookActions, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({...WorldActions, ...NotebookActions}, dispatch);
+}
 
-export default connect(mapStateToProps)(World);
+export default connect(mapStateToProps, mapDispatchToProps)(World);
+

@@ -4,3 +4,4 @@ app/main.js
 node_modules
 dll
 __snapshots__
+/app/main.js

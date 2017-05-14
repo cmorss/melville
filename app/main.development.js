@@ -1,8 +1,6 @@
 /* eslint global-require: 1, flowtype-errors/show-errors: 0 */
 // @flow
 import { app, BrowserWindow } from 'electron';
-import MenuBuilder from './menu';
-
 let mainWindow = null;
 
 if (process.env.NODE_ENV === 'production') {
@@ -54,6 +52,7 @@ app.on('ready', async () => {
   const url = (process.env.NODE_ENV === 'development')
     ? `http://localhost:${process.env.PORT || 1212}/dist/app.html`
     : `file://${__dirname}/dist/app.html`;
+
   mainWindow.loadURL(url);
 
   // @TODO: Use 'ready-to-show' event
@@ -69,7 +68,4 @@ app.on('ready', async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
 });

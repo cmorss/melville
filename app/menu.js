@@ -1,14 +1,17 @@
 // @flow
-import { app, Menu, shell, BrowserWindow } from 'electron';
+import { app, shell, BrowserWindow } from 'electron';
+import * as NotebookActions from './actions/notebooks';
 
 export default class MenuBuilder {
   mainWindow: BrowserWindow;
 
-  constructor(mainWindow: BrowserWindow) {
+  constructor(mainWindow: BrowserWindow, appMenu: Menu, store) {
     this.mainWindow = mainWindow;
+    this.appMenu = appMenu;
+    this.store = store;
   }
 
-  buildMenu() {
+  buildMenu(Menu) {
     if (process.env.NODE_ENV === 'development') {
       this.setupDevelopmentEnvironment();
     }
@@ -16,9 +19,9 @@ export default class MenuBuilder {
     let template;
 
     if (process.platform === 'darwin') {
-      template = this.buildDarwinTemplate();
+      template = this.buildDarwinTemplate(this.store);
     } else {
-      template = this.buildDefaultTemplate();
+      template = this.buildDefaultTemplate(this.store);
     }
 
     const menu = Menu.buildFromTemplate(template);
@@ -43,19 +46,35 @@ export default class MenuBuilder {
     });
   }
 
-  buildDarwinTemplate() {
+  buildDarwinTemplate(store) {
     const subMenuAbout = {
-      label: 'Electron',
+      label: 'Melville',
       submenu: [
-        { label: 'About ElectronReact', selector: 'orderFrontStandardAboutPanel:' },
+        { label: 'About Melville', selector: 'orderFrontStandardAboutPanel:' },
         { type: 'separator' },
         { label: 'Services', submenu: [] },
         { type: 'separator' },
-        { label: 'Hide ElectronReact', accelerator: 'Command+H', selector: 'hide:' },
+        { label: 'Hide Melville', accelerator: 'Command+H', selector: 'hide:' },
         { label: 'Hide Others', accelerator: 'Command+Shift+H', selector: 'hideOtherApplications:' },
         { label: 'Show All', selector: 'unhideAllApplications:' },
         { type: 'separator' },
         { label: 'Quit', accelerator: 'Command+Q', click: () => { app.quit(); } }
+      ]
+    };
+    const subMenuFile = {
+      label: 'File',
+      submenu: [
+        { label: 'New...', accelerator: 'Shift+Command+N', selector: 'newFile:' },
+        { label: 'Open...', accelerator: 'Command+O', selector: 'open:' },
+        { type: 'separator' },
+        { label: 'Save', accelerator: 'Command+S', selector: 'save:',
+          click: function() {
+            store.dispatch(NotebookActions.saveActiveNotebook());
+          }},
+        { label: 'Save As...', selector: 'saveAs:' },
+        { type: 'separator' },
+        { label: 'Export as HTML...', accelerator: 'Shift+Command+E', selector: 'exportHtml:' },
+        { label: 'Export as Text...', accelerator: 'Shift+Command+T', selector: 'exportText:' }
       ]
     };
     const subMenuEdit = {
@@ -96,10 +115,9 @@ export default class MenuBuilder {
     const subMenuHelp = {
       label: 'Help',
       submenu: [
-        { label: 'Learn More', click() { shell.openExternal('http://electron.atom.io'); } },
-        { label: 'Documentation', click() { shell.openExternal('https://github.com/atom/electron/tree/master/docs#readme'); } },
-        { label: 'Community Discussions', click() { shell.openExternal('https://discuss.atom.io/c/electron'); } },
-        { label: 'Search Issues', click() { shell.openExternal('https://github.com/atom/electron/issues'); } }
+        { label: 'Learn More', click() { shell.openExternal('https://github.com/cmorss/melville/README.md'); } },
+        { label: 'Documentation', click() { shell.openExternal('https://github.com/cmorss/melville/README.md'); } },
+        { label: 'Search Issues', click() { shell.openExternal('https://github.com/cmorss/melville/issues'); } }
       ]
     };
 
@@ -109,6 +127,7 @@ export default class MenuBuilder {
 
     return [
       subMenuAbout,
+      subMenuFile,
       subMenuEdit,
       subMenuView,
       subMenuWindow,
@@ -161,22 +180,17 @@ export default class MenuBuilder {
       submenu: [{
         label: 'Learn More',
         click() {
-          shell.openExternal('http://electron.atom.io');
+          shell.openExternal('https://github.com/cmorss/melville/README.md');
         }
       }, {
         label: 'Documentation',
         click() {
-          shell.openExternal('https://github.com/atom/electron/tree/master/docs#readme');
-        }
-      }, {
-        label: 'Community Discussions',
-        click() {
-          shell.openExternal('https://discuss.atom.io/c/electron');
+          shell.openExternal('https://github.com/cmorss/melville/README.md');
         }
       }, {
         label: 'Search Issues',
         click() {
-          shell.openExternal('https://github.com/atom/electron/issues');
+          shell.openExternal('https://github.com/cmorss/melville/issues');
         }
       }]
     }];

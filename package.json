@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
-  "version": "0.11.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "Melville",
+  "productName": "Melville Engineering Notebook",
+  "version": "0.1.0",
+  "description": "Melville Engineering Notebook",
   "main": "main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings ./test/runTests.js",
@@ -32,8 +32,8 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "Melville",
+    "appId": "org.cmorss.melville",
     "files": [
       "dist/",
       "node_modules/",
@@ -74,20 +74,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chentsulin/electron-react-boilerplate.git"
+    "url": "git+https://github.com/cmorss/melville.git"
   },
   "author": {
-    "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "name": "Charlie Morss",
+    "email": "charlie.morss@gmail.com",
+    "url": "https://github.com/cmorss"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chentsulin/electron-react-boilerplate/issues"
+    "url": "https://github.com/cmorss/melville/issues"
   },
   "keywords": [
     "electron",
-    "boilerplate",
+    "notebook",
+    "engineer",
     "react",
     "redux",
     "flow",
@@ -96,7 +97,7 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/chentsulin/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/cmorss/melville#readme",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
@@ -117,7 +118,7 @@
     "asar": "^0.13.0",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.2",
-    "babel-jest": "^19.0.0",
+    "babel-jest": "^20.0.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dev-expression": "^0.2.1",
@@ -167,6 +168,7 @@
     "jest": "^19.0.2",
     "jsdom": "^9.12.0",
     "minimist": "^1.2.0",
+    "mock-require": "2.0.2",
     "node-sass": "^4.5.2",
     "react-addons-test-utils": "^15.5.1",
     "react-test-renderer": "^15.5.4",
@@ -198,6 +200,7 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "redux-promise-middleware": "^4.2.0",
     "source-map-support": "^0.4.14",
     "react-tap-event-plugin": "^2.0.1"
   },
